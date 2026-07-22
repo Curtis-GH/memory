@@ -23,8 +23,13 @@
 }
 
 .btn--play {
-  width: $button-width-home;
-  height: $button-height-home;
+  width: clamp(9rem, 17vw, $button-width-home);
+  aspect-ratio: #{$button-aspect-home};
   background-color: $color-accent-yellow;
   color: $color-bg-dark;
+}
+
+.btn__icon {
+  width: clamp(1.1rem, 1.6vw, 1.5rem);
+  height: auto;
 }

@@ -16,11 +16,14 @@ export function renderHome(root: HTMLElement, onPlay: () => void): void {
 function homeTemplate(): string {
   return `
     <section class="home">
-      <img class="home__controller-icon" src="/controller-icon.svg" alt="" aria-hidden="true" />
+      <img class="home__controller-icon" src="/home/home-controller.png" alt="" aria-hidden="true" />
       <div class="home__content">
         <p class="home__eyebrow">It's play time.</p>
         <h1 class="home__title">Ready to play?</h1>
-        <button class="btn btn--play" type="button">Play →</button>
+        <button class="btn btn--play" type="button">
+          <img class="btn__icon" src="/home/home-play-icon.svg" alt="" aria-hidden="true" />
+          Play →
+        </button>
       </div>
     </section>
   `;

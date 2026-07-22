@@ -23,7 +23,6 @@
     color: $color-text-light;
     font-size: clamp(1rem, 1.2vw, 1.25rem);
     opacity: 0.85;
-    margin-bottom: 0.25rem;
   }
 
   &__title {
@@ -36,11 +35,10 @@
 
   &__controller-icon {
     position: absolute;
-    left: clamp(-3rem, -2vw, -0.5rem);
-    bottom: clamp(-3rem, -2vw, -0.5rem);
-    width: clamp(12rem, 20vw, 20rem);
-    height: auto;
-    opacity: 0.15;
+    left: clamp(-4rem, -3vw, -1rem);
+    bottom: clamp(-4rem, -3vw, -1rem);
+    width: clamp(14rem, 22vw, 22rem);
+    color: rgba($color-text-light, 0.06);
     z-index: 0;
     animation: controller-float 4s ease-in-out infinite;
   }
