@@ -13,3 +13,9 @@ export interface GameSettings {
   player: PlayerColor | null;
   boardSize: BoardSize | null;
 }
+
+/**
+ * Die 4 Screens der App. Navigation läuft ohne Router über simples
+ * Show/Hide (Entscheidung: kein Back-Button-Support nötig für ein Spiel).
+ */
+export type Screen = "home" | "settings" | "board" | "gameOver";
