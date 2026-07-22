@@ -1,1 +1,30 @@
-// TODO Phase 1: Button-Styles (Play, Start, Exit game) nach Homescreen-Design
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.btn {
+  @include flex-center;
+  gap: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  border-radius: 0.5rem;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    transform: none;
+  }
+}
+
+.btn--play {
+  width: $button-width-home;
+  height: $button-height-home;
+  background-color: $color-accent-yellow;
+  color: $color-bg-dark;
+}
