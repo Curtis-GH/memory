@@ -1,8 +1,8 @@
 import type { GameSettings } from "./types";
 
 /**
- * Erzeugt den initialen, leeren Settings-Zustand.
- * Wird in Phase 2 (Settings-Page) an die UI gebunden.
+ * Creates the initial, empty settings state.
+ * Gets bound to the UI in Phase 2 (Settings page).
  */
 export function createInitialSettings(): GameSettings {
   return {
@@ -13,7 +13,7 @@ export function createInitialSettings(): GameSettings {
 }
 
 /**
- * Prüft, ob alle 3 Pflicht-Settings gesetzt sind (Start-Button-Bedingung, US2).
+ * Checks whether all 3 required settings are set (start-button condition, US2).
  */
 export function isSettingsComplete(settings: GameSettings): boolean {
   return settings.theme !== null && settings.player !== null && settings.boardSize !== null;

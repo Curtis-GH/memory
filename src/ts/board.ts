@@ -1,2 +1,2 @@
-// TODO Phase 3/4: Board-Aufbau (Grid je BoardSize), Karten mischen, Match-Check, Punktestand.
+// TODO Phase 3/4: board setup (grid per BoardSize), card shuffle, match check, score tracking.
 export {};

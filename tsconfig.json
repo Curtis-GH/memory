@@ -1,20 +1,20 @@
 {
   "compilerOptions": {
-    /* Sprache & Zielumgebung */
+    /* Language & target environment */
     "target": "ESNext",
     "lib": ["ESNext", "DOM"],
 
-    /* Module & Auflösung */
+    /* Modules & resolution */
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "isolatedModules": true,
 
-    /* Typprüfung */
+    /* Type checking */
     "strict": true,
     "skipLibCheck": true,
     "noEmit": true,
 
-    /* Sonstiges */
+    /* Other */
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true

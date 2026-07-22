@@ -1,10 +1,10 @@
-// Phase 1: renderHome() implementiert.
+// Phase 1: renderHome() implemented.
 // TODO Phase 2: renderSettings(), Phase 3/4: renderBoard(), Phase 5: renderGameOver()
 
 /**
- * Rendert den Homescreen und verdrahtet den Play-Button.
- * @param root - Mount-Element (#app)
- * @param onPlay - Callback, wenn der Nutzer auf "Play" klickt
+ * Renders the homescreen and wires up the play button.
+ * @param root - Mount element (#app)
+ * @param onPlay - Callback fired when the user clicks "Play"
  */
 export function renderHome(root: HTMLElement, onPlay: () => void): void {
   root.innerHTML = homeTemplate();
@@ -12,7 +12,7 @@ export function renderHome(root: HTMLElement, onPlay: () => void): void {
   playButton?.addEventListener("click", onPlay);
 }
 
-/** HTML-Template für den Homescreen, ausgelagert statt inline im Code. */
+/** HTML template for the homescreen, kept outside inline code. */
 function homeTemplate(): string {
   return `
     <section class="home">

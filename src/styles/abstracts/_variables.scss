@@ -1,22 +1,22 @@
-// Werte gemessen aus den Figma-Exporten (3x-Export zurückgerechnet auf 1x CSS-Pixel).
-// Nicht aus Figma-Panel übernommen, sondern per Pixel-Messung verifiziert.
+// Values measured from Figma exports (3x export, recalculated to 1x CSS pixels).
+// Not taken from Figma panel values - verified via pixel measurement.
 
-// Karte: fix in allen 3 Boardgrößen (16 / 24 / 36 Karten), nur der Gap ändert sich.
+// Card: fixed across all 3 board sizes (16 / 24 / 36 cards), only the gap changes.
 $card-width: 6.5625rem;   // 105px
 $card-height: 7.5rem;     // 120px
-$card-radius: 0.75rem;    // Platzhalter, noch nicht exakt gemessen -> in Phase 3 verifizieren
+$card-radius: 0.75rem;    // placeholder, not exactly measured yet -> verify in Phase 3
 
-$gap-board-4x4: 1rem;      // 16px, bei 16 Karten
-$gap-board-6xN: 0.375rem;  // 6px, bei 24 und 36 Karten
+$gap-board-4x4: 1rem;      // 16px, for 16 cards
+$gap-board-6xN: 0.375rem;  // 6px, for 24 and 36 cards
 
 $header-height: 6.375rem; // 102px
 
-// Farben: aus Home.jpg gemessen (JPG-Kompression -> ein paar Werte Toleranz, kein 100%
-// exakter Hex-Wert garantiert. Bei Dev-Mode-Zugriff auf Figma hier nachziehen.)
+// Colors: measured from Home.jpg (JPG compression -> some tolerance,
+// no 100% exact hex value guaranteed. Verify via Figma Dev Mode if available.)
 $color-bg-dark: #2f3130;
 $color-accent-yellow: #f0ea6e;
 $color-text-light: #ffffff;
 
-// Homescreen Button: gemessen aus Home.jpg (744x292px bei 3x-Export)
+// Homescreen button: measured from Home.jpg (744x292px at 3x export)
 $button-width-home: 15.5rem;    // 248px
 $button-height-home: 6.0625rem; // 97px

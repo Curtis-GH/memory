@@ -1,11 +1,11 @@
 /**
- * Gibt das Haupt-Mount-Element zurück, in das alle Screens gerendert werden.
- * Wirft einen Fehler, falls index.html verändert wurde und #app fehlt.
+ * Returns the main mount element into which all screens are rendered.
+ * Throws an error if index.html was changed and #app is missing.
  */
 export function getAppRoot(): HTMLElement {
   const root = document.getElementById("app");
   if (!root) {
-    throw new Error("Mount-Element #app nicht gefunden. Prüfe index.html.");
+    throw new Error("Mount element #app not found. Check index.html.");
   }
   return root;
 }

@@ -1,13 +1,13 @@
-/** Verfügbare Spielthemes (siehe Settings-Page, 4 Stück). */
+/** Available game themes (see settings page, 4 total). */
 export type GameTheme = "codeVibes" | "gaming" | "daProjects" | "foods";
 
-/** Spielerfarbe, aktuell 2 Optionen laut Checkliste US2. */
+/** Player color, currently 2 options per checklist US2. */
 export type PlayerColor = "blue" | "orange";
 
-/** Kartenanzahl pro Boardgröße. 16 = 4x4, 24 = 6x4, 36 = 6x6 (gemessen aus Figma-Export). */
+/** Card count per board size. 16 = 4x4, 24 = 6x4, 36 = 6x6 (measured from Figma export). */
 export type BoardSize = 16 | 24 | 36;
 
-/** Einstellungen, die der Nutzer auf der Settings-Page trifft, bevor "Start" aktiv wird. */
+/** Settings the user picks on the settings page before "Start" becomes active. */
 export interface GameSettings {
   theme: GameTheme | null;
   player: PlayerColor | null;
@@ -15,7 +15,7 @@ export interface GameSettings {
 }
 
 /**
- * Die 4 Screens der App. Navigation läuft ohne Router über simples
- * Show/Hide (Entscheidung: kein Back-Button-Support nötig für ein Spiel).
+ * The app's 4 screens. Navigation uses simple show/hide, no router
+ * (decision: no back-button support needed for a game).
  */
 export type Screen = "home" | "settings" | "board" | "gameOver";

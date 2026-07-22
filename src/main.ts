@@ -3,22 +3,22 @@ import { getAppRoot } from "./ts/dom";
 import { renderHome } from "./ts/render";
 
 /**
- * Einstiegspunkt der App. Steuert simples Show/Hide zwischen Screens
- * (kein Router, siehe Projekt-Entscheidung - 4 Screens, kein Back-Button-Bedarf).
+ * App entry point. Controls simple show/hide between screens
+ * (no router, per project decision - 4 screens, no back-button need).
  */
 function init(): void {
   const app = getAppRoot();
   showHome(app);
 }
 
-/** Zeigt den Homescreen und verdrahtet die Navigation zu Settings. */
+/** Shows the homescreen and wires up navigation to settings. */
 function showHome(app: HTMLElement): void {
   renderHome(app, () => showSettingsPlaceholder(app));
 }
 
-/** Platzhalter bis Phase 2 die echte Settings-Page liefert. */
+/** Placeholder until Phase 2 delivers the real settings page. */
 function showSettingsPlaceholder(app: HTMLElement): void {
-  app.innerHTML = `<p style="color: white; padding: 2rem;">Settings – kommt in Phase 2</p>`;
+  app.innerHTML = `<p style="color: white; padding: 2rem;">Settings – coming in Phase 2</p>`;
 }
 
 init();

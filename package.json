@@ -1,7 +1,7 @@
 {
   "name": "memory",
   "version": "1.0.0",
-  "description": "Memory-Spiel mit TypeScript und SCSS",
+  "description": "Memory game built with TypeScript and SCSS",
   "main": "index.html",
   "scripts": {
     "dev": "vite",
