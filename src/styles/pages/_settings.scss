@@ -1,1 +1,79 @@
-// TODO Phase 2: settings page layout
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.settings {
+  min-height: 100vh;
+  background-color: #ffffff;
+  padding: clamp(2rem, 5vw, 4rem);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  &__title {
+    font-weight: 800;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    border-bottom: 0.25rem solid $color-accent-yellow;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+    align-self: flex-start;
+  }
+
+  &__body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: flex-start;
+  }
+
+  &__options {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    min-width: 14rem;
+  }
+
+  &__preview {
+    background-color: $color-bg-dark;
+    border-radius: 0.75rem;
+    padding: clamp(1rem, 2vw, 2rem);
+    min-width: clamp(16rem, 30vw, 24rem);
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.option-group {
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  &__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-left: 1.75rem;
+  }
+}
+
+.settings__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #f2f2f2;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  align-self: flex-start;
+  font-size: 0.9rem;
+  color: #555;
+}

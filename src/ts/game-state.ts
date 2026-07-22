@@ -18,3 +18,18 @@ export function createInitialSettings(): GameSettings {
 export function isSettingsComplete(settings: GameSettings): boolean {
   return settings.theme !== null && settings.player !== null && settings.boardSize !== null;
 }
+
+/** Returns a copy of settings with the theme updated. */
+export function setTheme(settings: GameSettings, theme: GameSettings["theme"]): GameSettings {
+  return { ...settings, theme };
+}
+
+/** Returns a copy of settings with the player color updated. */
+export function setPlayer(settings: GameSettings, player: GameSettings["player"]): GameSettings {
+  return { ...settings, player };
+}
+
+/** Returns a copy of settings with the board size updated. */
+export function setBoardSize(settings: GameSettings, boardSize: GameSettings["boardSize"]): GameSettings {
+  return { ...settings, boardSize };
+}
