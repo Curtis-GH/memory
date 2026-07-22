@@ -1,5 +1,5 @@
-/** Available game themes (see settings page, 4 total). */
-export type GameTheme = "codeVibes" | "gaming" | "daProjects" | "foods";
+/** Available game themes (see settings page). Reduced to 2 per project decision. */
+export type GameTheme = "codeVibes" | "gaming";
 
 /** Player color, currently 2 options per checklist US2. */
 export type PlayerColor = "blue" | "orange";

@@ -33,11 +33,23 @@ function homeTemplate(): string {
   `;
 }
 
+/** Per-theme assets for the hover preview: back card, front-card icon, preview background modifier class. */
+const THEME_PREVIEW: Record<GameTheme, { back: string; icon: string; bgClass: string }> = {
+  codeVibes: {
+    back: "/theme/card-back-codevibes.png",
+    icon: "/settings/settings-icon-codevibes.png",
+    bgClass: "settings__preview--codevibes",
+  },
+  gaming: {
+    back: "/theme/card-back-gaming.png",
+    icon: "/theme/theme-icon-gaming.png",
+    bgClass: "settings__preview--gaming",
+  },
+};
+
 const THEME_OPTIONS: { value: GameTheme; label: string }[] = [
   { value: "codeVibes", label: "Code vibes theme" },
   { value: "gaming", label: "Gaming theme" },
-  { value: "daProjects", label: "DA Projects theme" },
-  { value: "foods", label: "Foods theme" },
 ];
 
 const PLAYER_OPTIONS: { value: PlayerColor; label: string }[] = [
@@ -64,6 +76,7 @@ export function renderSettings(
 ): void {
   root.innerHTML = settingsTemplate(settings);
   attachSettingsListeners(root, settings, onStart);
+  attachThemeHoverPreview(root);
 }
 
 /** Full settings page markup, split into small template helpers below. */
@@ -73,9 +86,11 @@ function settingsTemplate(settings: GameSettings): string {
       <h1 class="settings__title">Settings</h1>
       <div class="settings__body">
         ${optionsColumnTemplate(settings)}
-        ${previewTemplate(settings.theme)}
+        <div class="settings__preview-column">
+          <div class="settings__preview"></div>
+          ${breadcrumbTemplate(settings)}
+        </div>
       </div>
-      ${breadcrumbTemplate(settings)}
     </section>
   `;
 }
@@ -85,43 +100,19 @@ function optionsColumnTemplate(settings: GameSettings): string {
   return `
     <div class="settings__options">
       ${optionGroupTemplate("theme", "Game themes", "/settings/settings-icon-theme.png", THEME_OPTIONS, settings.theme)}
-      ${optionGroupTemplate("player", "Choose player", "/player/player-token.png", PLAYER_OPTIONS, settings.player)}
+      ${optionGroupTemplate("player", "Choose player", "/settings/settings-icon-player.png", PLAYER_OPTIONS, settings.player)}
       ${optionGroupTemplate("boardSize", "Board size", "/settings/settings-icon-board-size.png", BOARD_SIZE_OPTIONS, settings.boardSize)}
     </div>
   `;
 }
 
-/** Right column: live preview image based on the selected theme. */
-function previewTemplate(theme: GameSettings["theme"]): string {
-  return `
-    <div class="settings__preview">
-      <img src="${previewImage(theme)}" alt="" aria-hidden="true" style="max-width: 100%;" />
-    </div>
-  `;
-}
-
-/** Maps a theme to its preview asset. Falls back to a generic card if none selected. */
-function previewImage(theme: GameSettings["theme"]): string {
-  switch (theme) {
-    case "codeVibes":
-      return "/theme/card-back-codevibes.png";
-    case "gaming":
-      return "/theme/card-front-gaming.png";
-    case "daProjects":
-      return "/theme/theme-icon-daprojects.png";
-    case "foods":
-      return "/theme/card-front-generic.png";
-    default:
-      return "/theme/card-front-generic.png";
-  }
-}
-
-/** Bottom bar: breadcrumb labels + Start button (disabled until settings complete). */
+/** Bottom bar: breadcrumb labels + board-size icon + Start button (disabled until settings complete). */
 function breadcrumbTemplate(settings: GameSettings): string {
   const disabled = isSettingsComplete(settings) ? "" : "disabled";
   return `
     <div class="settings__breadcrumb">
       <span>Game theme</span> / <span>Player</span> / <span>Board size</span>
+      <img class="btn__icon" src="/settings/settings-icon-board-size.png" alt="" aria-hidden="true" />
       <button class="btn btn--start" type="button" ${disabled}>Start</button>
     </div>
   `;
@@ -181,4 +172,38 @@ function bindRadioGroup(root: HTMLElement, name: string, onChange: (value: strin
   root.querySelectorAll<HTMLInputElement>(`input[name="${name}"]`).forEach((el) =>
     el.addEventListener("change", () => onChange(el.value))
   );
+}
+
+/** Shows a theme's mini board preview in the preview box while hovering its option label. */
+function attachThemeHoverPreview(root: HTMLElement): void {
+  const previewEl = root.querySelector<HTMLElement>(".settings__preview");
+  if (!previewEl) return;
+  root.querySelectorAll<HTMLLabelElement>('[data-group="theme"] .option').forEach((label) => {
+    const input = label.querySelector<HTMLInputElement>("input");
+    if (!input) return;
+    label.addEventListener("mouseenter", () => showThemePreview(previewEl, input.value as GameTheme));
+    label.addEventListener("mouseleave", () => clearThemePreview(previewEl));
+  });
+}
+
+/** Fills the preview box with the mini header + example card pair for a theme. */
+function showThemePreview(previewEl: HTMLElement, theme: GameTheme): void {
+  const { back, icon, bgClass } = THEME_PREVIEW[theme];
+  previewEl.className = `settings__preview ${bgClass}`;
+  previewEl.innerHTML = `
+    <div class="preview-header">
+      <span class="preview-header__badges"><span>Blue 0</span><span>Orange 0</span></span>
+      <span class="preview-header__exit">Exit game</span>
+    </div>
+    <div class="preview-cards">
+      <img class="preview-cards__card preview-cards__card--back" src="${back}" alt="" aria-hidden="true" />
+      <img class="preview-cards__card preview-cards__card--front" src="${icon}" alt="" aria-hidden="true" />
+    </div>
+  `;
+}
+
+/** Resets the preview box to its empty state when the pointer leaves. */
+function clearThemePreview(previewEl: HTMLElement): void {
+  previewEl.className = "settings__preview";
+  previewEl.innerHTML = "";
 }

@@ -17,6 +17,10 @@ $color-bg-dark: #2f3130;
 $color-accent-yellow: #f0ea6e;
 $color-text-light: #ffffff;
 
+// Board preview background per theme (measured from board screenshots).
+$color-bg-codevibes: #1e1f1e;
+$color-bg-gaming: #2a4f61;
+
 // Homescreen button: measured from Figma export (248x97px at 1440px baseline).
 // Fluid via clamp() + aspect-ratio in _button.scss, not fixed px.
 $button-width-home: 15.5rem; // 248px, used as clamp() max value
