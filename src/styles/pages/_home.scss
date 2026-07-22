@@ -31,4 +31,23 @@
     line-height: 1.05;
     margin-bottom: 1rem;
   }
+
+  &__controller-icon {
+    position: absolute;
+    left: clamp(-4rem, -3vw, -1rem);
+    bottom: clamp(-4rem, -3vw, -1rem);
+    width: clamp(14rem, 22vw, 22rem);
+    color: rgba($color-text-light, 0.06);
+    z-index: 0;
+    animation: controller-float 4s ease-in-out infinite;
+  }
+}
+
+@keyframes controller-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.75rem);
+  }
 }
