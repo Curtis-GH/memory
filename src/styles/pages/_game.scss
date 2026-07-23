@@ -3,10 +3,28 @@
 
 .board {
   min-height: 100vh;
+
+  // Widescreen rule (same as home/settings): bg goes full width, content stays centered.
+  &__wrapper {
+    max-width: 90rem; // 1440px
+    margin: 0 auto;
+    padding: clamp(1.5rem, 4vw, 3rem);
+  }
+}
+
+// Code vibes: flat dark background (confirmed, matches $color-bg-dark elsewhere).
+.board--codeVibes {
   background-color: $color-bg-dark;
 }
 
+// Gaming: solid background (confirmed via Figma - NOT the diagonal gradient used
+// in the small settings-preview box, that was a stylized preview-only choice).
+.board--gaming {
+  background-color: $color-bg-gaming-end;
+}
+
 // Exit-confirmation popup: dark overlay, white box, fades in from above.
+// Colors (fill/outline buttons) differ per theme - see modifiers below.
 .popup-overlay {
   position: fixed;
   inset: 0;
@@ -23,7 +41,7 @@
   max-width: 34rem;
   width: 90%;
   text-align: center;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   transform: translateY(-1rem);
   animation: popup-slide-in 0.25s ease forwards;
 
@@ -45,19 +63,51 @@
     padding: 0.75rem 1.75rem;
     font-weight: 700;
     font-size: 1rem;
-    border-radius: 0.25rem;
+    border-radius: 0.6rem;
     cursor: pointer;
+  }
+}
+
+// Code vibes popup: teal family (confirmed via Figma).
+.popup--codeVibes {
+  .popup__back,
+  .popup__exit {
     border: 1px solid $color-codevibes-exit-border;
   }
 
-  &__back {
+  .popup__back {
     background: $color-popup-btn-fill-codevibes;
     color: $color-text-light;
   }
 
-  &__exit {
+  .popup__exit {
     background: $color-popup-btn-outline-bg-codevibes;
     color: $color-codevibes-exit-border;
+  }
+}
+
+// Gaming popup: magenta/pink family + gaming font (confirmed via Figma).
+.popup--gaming {
+  font-family: $font-gaming;
+
+  .popup__text {
+    color: #1e3a4a;
+  }
+
+  .popup__back,
+  .popup__exit {
+    border: 1px solid $color-gaming-exit-border;
+    border-radius: 999px;
+  }
+
+  .popup__back {
+    background: $color-popup-btn-fill-gaming;
+    color: $color-text-light;
+  }
+
+  .popup__exit {
+    background: $color-popup-btn-outline-bg-gaming;
+    color: $color-gaming-exit-border;
   }
 }
 

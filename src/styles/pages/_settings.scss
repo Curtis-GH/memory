@@ -204,7 +204,8 @@
   }
 }
 
-// Gaming header: one continuous pill containing everything, radius ~50%.
+// Gaming header: outer bar has a small radius (confirmed via real Figma export -
+// not a full pill like originally assumed). Only the score badge itself is a pill.
 .preview-header--gaming {
   position: absolute;
   top: 0.75rem;
@@ -214,16 +215,17 @@
   justify-content: space-between;
   align-items: center;
   font-size: 0.6rem;
+  font-family: $font-gaming;
   color: $color-text-light;
   z-index: 1;
-  background: rgba(60, 70, 90, 0.35);
-  border-radius: 999px;
+  background: rgba(60, 70, 90, 0.6);
+  border-radius: $header-radius-gaming;
   padding: 0.3rem 0.6rem;
 
   .badges {
     background: #ffffff;
     color: #333;
-    border-radius: 999px;
+    border-radius: $badge-radius-gaming;
     padding: 0.2rem 0.6rem;
     display: flex;
     gap: 0.6rem;
@@ -243,7 +245,7 @@
   }
 
   .player-chip--blue {
-    color: #2196f3;
+    color: $color-gaming-badge-blue;
   }
 
   .player-chip--orange {
@@ -258,17 +260,17 @@
     img {
       width: 0.9rem;
       height: 0.9rem;
-      background: #2196f3;
-      border-radius: 999px;
+      background: $color-gaming-badge-blue;
+      border-radius: $current-player-radius-gaming;
       padding: 0.15rem;
     }
   }
 
   .exit {
     background: transparent;
-    border: 1px solid $color-gaming-exit-bg;
+    border: 1px solid $color-gaming-exit-border;
     color: $color-text-light;
-    border-radius: 999px;
+    border-radius: 0.4rem;
     padding: 0.2rem 0.6rem;
     font-weight: 700;
     display: flex;

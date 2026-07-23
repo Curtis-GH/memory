@@ -1,15 +1,26 @@
 // Values measured from Figma exports (3x export, recalculated to 1x CSS pixels).
 // Not taken from Figma panel values - verified via pixel measurement.
 
-// Card: fixed square across all 3 board sizes (16 / 24 / 36 cards), only the gap changes.
-// Confirmed via pixel measurement against the "Code vibes theme_24/_36" Figma exports:
-// measured gap:card ratio matches 16px (4-col) / 6px (6-col) almost exactly at 120x120.
+// Card: Code vibes is a fixed SQUARE across all 3 board sizes (16 / 24 / 36 cards),
+// only the gap changes. Confirmed via pixel measurement against the
+// "Code vibes theme_24/_36" Figma exports: measured gap:card ratio matches
+// 16px (4-col) / 6px (6-col) almost exactly at 120x120.
 $card-width: 7.5rem;      // 120px
 $card-height: 7.5rem;     // 120px
 $card-radius: 0.75rem;    // placeholder, not exactly measured yet -> verify visually
 
 $gap-board-4x4: 1rem;      // 16px, for 16 cards
 $gap-board-6xN: 0.375rem;  // 6px, for 24 and 36 cards
+
+// Gaming card is a PORTRAIT rectangle, not a square (confirmed via "Games theme_16"
+// Figma export: measured ratio 144:160 screenshot-px ~= 129:144, matching the
+// original asset export dimensions). Gap only confirmed for the 16-card layout so
+// far - the 24/36 values are extrapolated using the same gap:card ratio method
+// that worked for Code vibes, not yet cross-checked against a real Figma export.
+$card-width-gaming: 8.0625rem;   // 129px
+$card-height-gaming: 9rem;       // 144px
+$gap-board-gaming-4x4: 0.5rem;     // ~8px, measured
+$gap-board-gaming-6xN: 0.1875rem;  // ~3px, extrapolated (not Figma-confirmed)
 
 $header-height: 6.375rem; // 102px
 $card-flip-duration: 0.5s;
@@ -23,25 +34,38 @@ $color-text-light: #ffffff;
 // Board preview background per theme (measured from board screenshots).
 $color-bg-codevibes: #1e1f1e;
 $color-bg-gaming-start: #2086b4;
-$color-bg-gaming-end: #294f60;
+$color-bg-gaming-end: #294f60; // confirmed exact match on the real "Games theme_16" board export
 
-// Code vibes preview header (rectangular, no radius).
+// Code vibes header (rectangular, no radius - confirmed).
 $color-codevibes-badge-border: #86e9d6;
 $color-codevibes-exit-border: #4dd5bc;
 
-// Gaming preview header (pill-shaped, red exit button).
-// Exact red not supplied by Figma export - approximated, flagged for review.
-$color-gaming-exit-bg: #e6435a;
+// Gaming header. Corrected after measuring the real board export (previously assumed
+// a full pill for the whole bar - wrong, only the score badge is a true pill,
+// the outer bar itself is just slightly rounded).
+$color-gaming-exit-border: #e71c4f; // corrected from the earlier #e6435a placeholder
+$color-gaming-badge-blue: #1faafc;  // measured, replaces the earlier #2196f3 guess
+$header-radius-gaming: 0.75rem;     // outer bar, small rounding, not a pill
+$badge-radius-gaming: 999px;        // score badge itself IS a true pill
+$current-player-radius-gaming: 0.4rem; // rounded square, not a circle (corrected)
 
 // Player colors, shared between settings preview and real game header.
 $color-player-blue: #4dabf7;
 $color-player-orange: #f5822a;
 
-// Exit-confirmation popup (both themes reuse this structure, colors from Figma popup export).
+// Exit-confirmation popup. Code vibes = teal family, Gaming = magenta/pink family
+// (both measured directly from their respective Figma popup exports).
 $color-popup-bg: #ffffff;
 $color-popup-text: #222222;
 $color-popup-btn-fill-codevibes: #96ded1;
 $color-popup-btn-outline-bg-codevibes: #eefcf9;
+$color-popup-btn-fill-gaming: #ed1b76;
+$color-popup-btn-outline-bg-gaming: #f0e5ee;
+
+// Gaming uses a rounded, playful display font - no font file was supplied via
+// Figma, so this is a Google Fonts stand-in chosen to look similar. Loaded in
+// index.html. Flagged for visual review once real gameplay is visible.
+$font-gaming: "Fredoka", sans-serif;
 
 // Homescreen button: measured from Figma (250x98px). Fluid via clamp()+aspect-ratio,
 // gap between icon/text/arrow measured directly from reference asset (~24px, not the

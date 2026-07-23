@@ -1,21 +1,16 @@
 @use "../abstracts/variables" as *;
 @use "../abstracts/mixins" as *;
 
-// Real game-board header (Code vibes: rectangular, no radius - confirmed via
-// pixel measurement, same structure as the settings preview but full-size).
-.board__header {
+// Shared layout, colors/shapes differ per theme below.
+.game-header {
   min-height: $header-height;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: $color-text-light;
-  padding: 0 clamp(1rem, 3vw, 2rem);
   gap: 1rem;
 
   .badges {
-    border: 1px solid $color-codevibes-badge-border;
-    background: rgba(255, 255, 255, 0.08);
-    padding: 0.5rem 1rem;
     display: flex;
     gap: 1.25rem;
     align-items: center;
@@ -44,17 +39,15 @@
     @include flex-center;
     gap: 0.5rem;
     font-weight: 700;
+    font-size: clamp(1.1rem, 1.8vw, 1.5rem);
 
     img {
-      width: 1.1rem;
+      width: clamp(1.4rem, 2vw, 1.75rem);
       height: auto;
     }
   }
 
   .exit {
-    border: 1px solid $color-codevibes-exit-border;
-    background: $color-bg-dark;
-    color: $color-text-light;
     padding: 0.6rem 1.1rem;
     font-weight: 700;
     font-size: 1rem;
@@ -67,5 +60,53 @@
       width: 1rem;
       height: 1rem;
     }
+  }
+}
+
+// Code vibes: rectangular boxes, no radius (confirmed via pixel measurement).
+.game-header--codeVibes {
+  .badges {
+    border: 1px solid $color-codevibes-badge-border;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.5rem 1rem;
+  }
+
+  .exit {
+    border: 1px solid $color-codevibes-exit-border;
+    background: $color-bg-dark;
+    color: $color-text-light;
+  }
+}
+
+// Gaming: outer bar is only slightly rounded (not a full pill - corrected after
+// measuring the real Figma board export), score badge itself IS a true pill.
+.game-header--gaming {
+  font-family: $font-gaming;
+  background: rgba(60, 70, 90, 0.6);
+  border-radius: $header-radius-gaming;
+  padding: 0.75rem 1.25rem;
+
+  .badges {
+    background: #ffffff;
+    color: #333;
+    border-radius: $badge-radius-gaming;
+    padding: 0.5rem 1.1rem;
+  }
+
+  .player-chip--blue {
+    color: $color-gaming-badge-blue;
+  }
+
+  .current-player img {
+    background: $color-gaming-badge-blue;
+    border-radius: $current-player-radius-gaming;
+    padding: 0.25rem;
+  }
+
+  .exit {
+    background: transparent;
+    border: 1px solid $color-gaming-exit-border;
+    color: $color-text-light;
+    border-radius: 0.6rem;
   }
 }

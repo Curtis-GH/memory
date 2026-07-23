@@ -1,11 +1,13 @@
 @use "../abstracts/variables" as *;
 
-// Column count + gap are set inline per board size (see render-board.ts),
-// following the confirmed Figma ratio: 16px gap at 4 columns, 6px at 6 columns.
+// Column count, gap and card size are all set inline per theme + board size
+// (see render-board.ts / BOARD_METRICS) - Code vibes is a fixed square,
+// Gaming is a fixed portrait rectangle, confirmed via Figma pixel measurement.
 .board__grid {
   display: grid;
-  grid-template-columns: repeat(var(--columns), $card-width);
+  grid-template-columns: repeat(var(--columns), var(--card-width, #{$card-width}));
+  grid-auto-rows: var(--card-height, #{$card-height});
   justify-content: center;
   gap: var(--gap, #{$gap-board-4x4});
-  padding: clamp(1.5rem, 4vw, 3rem);
+  margin-top: clamp(1.5rem, 4vw, 3rem);
 }

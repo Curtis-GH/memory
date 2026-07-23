@@ -1,10 +1,11 @@
 @use "../abstracts/variables" as *;
 
-// 3D flip card. .card is the click target/perspective container,
+// 3D flip card. .card is the click target/perspective container and fills its
+// grid cell (sized by --card-width/--card-height on .board__grid, see _grid.scss),
 // .card__inner rotates, the 2 .card__face images sit back-to-back on it.
 .card {
-  width: $card-width;
-  height: $card-height;
+  width: 100%;
+  height: 100%;
   background: none;
   border: none;
   padding: 0;
@@ -47,7 +48,19 @@
   transform: rotateY(180deg);
 }
 
-.card--matched .card__face--front {
+// Code vibes: flat cards, no shadow (confirmed - none visible in the Figma export).
+.board--codeVibes .card--matched .card__face--front {
   outline: 0.2rem solid $color-codevibes-exit-border;
+  outline-offset: -0.2rem;
+}
+
+// Gaming: cards have a visible drop shadow (confirmed via Figma export - Code
+// vibes cards don't have this, so it's scoped to the gaming theme only).
+.board--gaming .card__face {
+  filter: drop-shadow(0 0.4rem 0.5rem rgba(0, 0, 0, 0.35));
+}
+
+.board--gaming .card--matched .card__face--front {
+  outline: 0.2rem solid $color-gaming-exit-border;
   outline-offset: -0.2rem;
 }
