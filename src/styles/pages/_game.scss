@@ -1,1 +1,72 @@
-// TODO Phase 3+4: game board layout
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.board {
+  min-height: 100vh;
+  background-color: $color-bg-dark;
+}
+
+// Exit-confirmation popup: dark overlay, white box, fades in from above.
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  @include flex-center;
+  z-index: 10;
+  animation: popup-fade-in 0.2s ease;
+}
+
+.popup {
+  background: $color-popup-bg;
+  color: $color-popup-text;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  max-width: 34rem;
+  width: 90%;
+  text-align: center;
+  border-radius: 0.5rem;
+  transform: translateY(-1rem);
+  animation: popup-slide-in 0.25s ease forwards;
+
+  &__text {
+    font-weight: 800;
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    margin-bottom: 2rem;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  &__back,
+  &__exit {
+    padding: 0.75rem 1.75rem;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    border: 1px solid $color-codevibes-exit-border;
+  }
+
+  &__back {
+    background: $color-popup-btn-fill-codevibes;
+    color: $color-text-light;
+  }
+
+  &__exit {
+    background: $color-popup-btn-outline-bg-codevibes;
+    color: $color-codevibes-exit-border;
+  }
+}
+
+@keyframes popup-fade-in {
+  from { background: rgba(0, 0, 0, 0); }
+  to { background: rgba(0, 0, 0, 0.5); }
+}
+
+@keyframes popup-slide-in {
+  from { opacity: 0; transform: translateY(-1rem); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -19,3 +19,30 @@ export interface GameSettings {
  * (decision: no back-button support needed for a game).
  */
 export type Screen = "home" | "settings" | "board" | "gameOver";
+
+/** Visual state of a single card on the board. */
+export type CardStatus = "hidden" | "revealed" | "matched";
+
+/** One card on the board. Two cards share the same iconId (a matching pair). */
+export interface Card {
+  id: number;
+  iconId: string;
+  status: CardStatus;
+}
+
+/** Score per player color. */
+export type Scores = Record<PlayerColor, number>;
+
+/**
+ * Full state of an in-progress game. Kept immutable - every action in
+ * board.ts returns a new BoardState instead of mutating this one.
+ */
+export interface BoardState {
+  theme: GameTheme;
+  boardSize: BoardSize;
+  cards: Card[];
+  currentPlayer: PlayerColor;
+  scores: Scores;
+  /** IDs of the currently revealed (but not yet matched) cards, max 2. */
+  revealedIds: number[];
+}

@@ -1,1 +1,53 @@
-// TODO Phase 3: card styles (use $card-width/$card-height from abstracts/_variables)
+@use "../abstracts/variables" as *;
+
+// 3D flip card. .card is the click target/perspective container,
+// .card__inner rotates, the 2 .card__face images sit back-to-back on it.
+.card {
+  width: $card-width;
+  height: $card-height;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  perspective: 62.5rem;
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.card__inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform $card-flip-duration ease;
+  transform-style: preserve-3d;
+}
+
+.card--flipped .card__inner {
+  transform: rotateY(180deg);
+}
+
+.card__face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: $card-radius;
+  backface-visibility: hidden;
+}
+
+.card__face--back {
+  transform: rotateY(0deg);
+}
+
+.card__face--front {
+  transform: rotateY(180deg);
+}
+
+.card--matched .card__face--front {
+  outline: 0.2rem solid $color-codevibes-exit-border;
+  outline-offset: -0.2rem;
+}

@@ -1,1 +1,71 @@
-// TODO Phase 3: header bar in the game board (score, current player, exit button)
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+// Real game-board header (Code vibes: rectangular, no radius - confirmed via
+// pixel measurement, same structure as the settings preview but full-size).
+.board__header {
+  min-height: $header-height;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: $color-text-light;
+  padding: 0 clamp(1rem, 3vw, 2rem);
+  gap: 1rem;
+
+  .badges {
+    border: 1px solid $color-codevibes-badge-border;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.5rem 1rem;
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+  }
+
+  .player-chip {
+    @include flex-center;
+    gap: 0.4rem;
+    font-weight: 700;
+
+    img {
+      width: 1rem;
+      height: auto;
+    }
+  }
+
+  .player-chip--blue {
+    color: $color-player-blue;
+  }
+
+  .player-chip--orange {
+    color: $color-player-orange;
+  }
+
+  .current-player {
+    @include flex-center;
+    gap: 0.5rem;
+    font-weight: 700;
+
+    img {
+      width: 1.1rem;
+      height: auto;
+    }
+  }
+
+  .exit {
+    border: 1px solid $color-codevibes-exit-border;
+    background: $color-bg-dark;
+    color: $color-text-light;
+    padding: 0.6rem 1.1rem;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+
+    img {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}

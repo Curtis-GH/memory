@@ -1,15 +1,18 @@
 // Values measured from Figma exports (3x export, recalculated to 1x CSS pixels).
 // Not taken from Figma panel values - verified via pixel measurement.
 
-// Card: fixed across all 3 board sizes (16 / 24 / 36 cards), only the gap changes.
-$card-width: 6.5625rem;   // 105px
+// Card: fixed square across all 3 board sizes (16 / 24 / 36 cards), only the gap changes.
+// Confirmed via pixel measurement against the "Code vibes theme_24/_36" Figma exports:
+// measured gap:card ratio matches 16px (4-col) / 6px (6-col) almost exactly at 120x120.
+$card-width: 7.5rem;      // 120px
 $card-height: 7.5rem;     // 120px
-$card-radius: 0.75rem;    // placeholder, not exactly measured yet -> verify in Phase 3
+$card-radius: 0.75rem;    // placeholder, not exactly measured yet -> verify visually
 
 $gap-board-4x4: 1rem;      // 16px, for 16 cards
 $gap-board-6xN: 0.375rem;  // 6px, for 24 and 36 cards
 
 $header-height: 6.375rem; // 102px
+$card-flip-duration: 0.5s;
 
 // Colors: measured from Home.jpg (JPG compression -> some tolerance,
 // no 100% exact hex value guaranteed. Verify via Figma Dev Mode if available.)
@@ -29,6 +32,16 @@ $color-codevibes-exit-border: #4dd5bc;
 // Gaming preview header (pill-shaped, red exit button).
 // Exact red not supplied by Figma export - approximated, flagged for review.
 $color-gaming-exit-bg: #e6435a;
+
+// Player colors, shared between settings preview and real game header.
+$color-player-blue: #4dabf7;
+$color-player-orange: #f5822a;
+
+// Exit-confirmation popup (both themes reuse this structure, colors from Figma popup export).
+$color-popup-bg: #ffffff;
+$color-popup-text: #222222;
+$color-popup-btn-fill-codevibes: #96ded1;
+$color-popup-btn-outline-bg-codevibes: #eefcf9;
 
 // Homescreen button: measured from Figma (250x98px). Fluid via clamp()+aspect-ratio,
 // gap between icon/text/arrow measured directly from reference asset (~24px, not the

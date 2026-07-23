@@ -170,11 +170,11 @@
   }
 
   .player-chip--blue {
-    color: #4dabf7;
+    color: $color-player-blue;
   }
 
   .player-chip--orange {
-    color: #f5822a;
+    color: $color-player-orange;
   }
 
   .current-player {
@@ -247,7 +247,7 @@
   }
 
   .player-chip--orange {
-    color: #f5822a;
+    color: $color-player-orange;
   }
 
   .current-player {

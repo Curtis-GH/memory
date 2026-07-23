@@ -1,8 +1,10 @@
 import "./styles/main.scss";
 import { getAppRoot } from "./ts/dom";
 import { renderHome, renderSettings } from "./ts/render";
+import { renderBoard } from "./ts/render-board";
 import { createInitialSettings } from "./ts/game-state";
-import type { GameSettings } from "./ts/types";
+import { createBoardState } from "./ts/board";
+import type { GameSettings, BoardState } from "./ts/types";
 
 /**
  * App entry point. Controls simple show/hide between screens
@@ -20,12 +22,21 @@ function showHome(app: HTMLElement): void {
 
 /** Shows the settings page and wires up navigation to the board. */
 function showSettings(app: HTMLElement, settings: GameSettings): void {
-  renderSettings(app, settings, (finalSettings) => showBoardPlaceholder(app, finalSettings));
+  renderSettings(app, settings, (finalSettings) => showBoard(app, finalSettings));
 }
 
-/** Placeholder until Phase 3 delivers the real board. */
-function showBoardPlaceholder(app: HTMLElement, settings: GameSettings): void {
-  app.innerHTML = `<p style="color: white; padding: 2rem;">Board (${settings.theme}, ${settings.player}, ${settings.boardSize}) – coming in Phase 3</p>`;
+/**
+ * Starts a new round and shows the board. Non-null assertions are safe here:
+ * the Start button in renderSettings only fires onStart once isSettingsComplete() is true.
+ */
+function showBoard(app: HTMLElement, settings: GameSettings): void {
+  const state = createBoardState(settings.theme!, settings.boardSize!, settings.player!);
+  renderBoard(app, state, () => showHome(app), (finalState) => showGameOverPlaceholder(app, finalState));
+}
+
+/** Placeholder until Phase 4 delivers the real Game Over screen. */
+function showGameOverPlaceholder(app: HTMLElement, state: BoardState): void {
+  app.innerHTML = `<p style="color: white; padding: 2rem;">Game over – Blue ${state.scores.blue} / Orange ${state.scores.orange} – Phase 4</p>`;
 }
 
 init();

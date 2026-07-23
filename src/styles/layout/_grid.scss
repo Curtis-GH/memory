@@ -1,1 +1,11 @@
-// TODO Phase 3: card grid (4x4 / 6x4 / 6x6 depending on board size)
+@use "../abstracts/variables" as *;
+
+// Column count + gap are set inline per board size (see render-board.ts),
+// following the confirmed Figma ratio: 16px gap at 4 columns, 6px at 6 columns.
+.board__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), $card-width);
+  justify-content: center;
+  gap: var(--gap, #{$gap-board-4x4});
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
