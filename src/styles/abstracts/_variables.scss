@@ -19,9 +19,20 @@ $color-text-light: #ffffff;
 
 // Board preview background per theme (measured from board screenshots).
 $color-bg-codevibes: #1e1f1e;
-$color-bg-gaming: #2a4f61;
+$color-bg-gaming-start: #2086b4;
+$color-bg-gaming-end: #294f60;
 
-// Homescreen button: measured from Figma export (248x97px at 1440px baseline).
-// Fluid via clamp() + aspect-ratio in _button.scss, not fixed px.
-$button-width-home: 15.5rem; // 248px, used as clamp() max value
-$button-aspect-home: "248 / 97";
+// Code vibes preview header (rectangular, no radius).
+$color-codevibes-badge-border: #86e9d6;
+$color-codevibes-exit-border: #4dd5bc;
+
+// Gaming preview header (pill-shaped, red exit button).
+// Exact red not supplied by Figma export - approximated, flagged for review.
+$color-gaming-exit-bg: #e6435a;
+
+// Homescreen button: measured from Figma (250x98px). Fluid via clamp()+aspect-ratio,
+// gap between icon/text/arrow measured directly from reference asset (~24px, not the
+// 40px listed in Figma - didn't match the actual shipped button image).
+$button-width-home: 15.625rem; // 250px, used as clamp() max value
+$button-aspect-home: "250 / 98";
+$button-gap-home: 1.5rem; // 24px

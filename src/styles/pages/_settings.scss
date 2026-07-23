@@ -4,23 +4,37 @@
 .settings {
   min-height: 100vh;
   background-color: #ffffff;
-  padding: clamp(2rem, 5vw, 4rem);
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+
+  &__wrapper {
+    max-width: 90rem; // 1440px, widescreen rule: bg full width, content centered
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 4rem);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__title-row {
+    align-self: flex-start;
+  }
 
   &__title {
     font-weight: 800;
     font-size: clamp(1.75rem, 3vw, 2.5rem);
-    border-bottom: 0.25rem solid $color-accent-yellow;
-    padding-bottom: 0.5rem;
-    display: inline-block;
-    align-self: flex-start;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  &__title-divider {
+    height: auto;
+    width: clamp(10rem, 16vw, 16.5rem);
+    display: block;
   }
 
   &__body {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     gap: clamp(2rem, 5vw, 4rem);
     align-items: flex-start;
   }
@@ -32,7 +46,6 @@
     min-width: 14rem;
   }
 
-  // Right column: preview box + breadcrumb stacked directly underneath it.
   &__preview-column {
     display: flex;
     flex-direction: column;
@@ -41,7 +54,6 @@
   }
 
   &__preview {
-    background-color: #e9e9e9;
     border-radius: 0.75rem;
     aspect-ratio: 4 / 3;
     display: flex;
@@ -49,14 +61,14 @@
     justify-content: center;
     overflow: hidden;
     position: relative;
-    transition: background-color 0.2s ease;
+    transition: background 0.2s ease;
 
-    &--codevibes {
+    &--codeVibes {
       background-color: $color-bg-codevibes;
     }
 
     &--gaming {
-      background-color: $color-bg-gaming;
+      background: linear-gradient(160deg, $color-bg-gaming-start, $color-bg-gaming-end);
     }
   }
 }
@@ -83,19 +95,49 @@
   }
 }
 
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  input[type="radio"] {
+    width: 1.1rem;
+    height: 1.1rem;
+    cursor: pointer;
+  }
+
+  &--active {
+    font-weight: 700;
+  }
+
+  &--active .option__indicator {
+    width: clamp(1.5rem, 3vw, 2.5rem);
+    height: auto;
+    margin-left: 0.5rem;
+  }
+}
+
 .settings__breadcrumb {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   background-color: #f2f2f2;
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
+  padding: 0.6rem 1rem;
+  font-size: 0.85rem;
   color: #555;
+
+  &__divider {
+    width: 0.5rem;
+    height: 1.25rem;
+  }
+
+  &__spacer {
+    flex: 1;
+  }
 }
 
-// Mini mock of the real board header (badges, current player, exit button).
-.preview-header {
+// Code vibes header: rectangular boxes, no radius.
+.preview-header--codeVibes {
   position: absolute;
   top: 0.75rem;
   left: 0.75rem;
@@ -107,21 +149,133 @@
   color: $color-text-light;
   z-index: 1;
 
-  &__badges span {
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 0.25rem;
-    padding: 0.15rem 0.4rem;
-    margin-right: 0.25rem;
+  .badges {
+    border: 1px solid $color-codevibes-badge-border;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.2rem 0.5rem;
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
   }
 
-  &__exit {
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 0.25rem;
-    padding: 0.15rem 0.4rem;
+  .player-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+
+    img {
+      width: 0.6rem;
+      height: auto;
+    }
+  }
+
+  .player-chip--blue {
+    color: #4dabf7;
+  }
+
+  .player-chip--orange {
+    color: #f5822a;
+  }
+
+  .current-player {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+
+    img {
+      width: 0.7rem;
+      height: auto;
+    }
+  }
+
+  .exit {
+    border: 1px solid $color-codevibes-exit-border;
+    padding: 0.2rem 0.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    img {
+      width: 0.6rem;
+      height: 0.6rem;
+    }
   }
 }
 
-// The 2 example cards (back + face-up) shown in the preview box.
+// Gaming header: one continuous pill containing everything, radius ~50%.
+.preview-header--gaming {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.6rem;
+  color: $color-text-light;
+  z-index: 1;
+  background: rgba(60, 70, 90, 0.35);
+  border-radius: 999px;
+  padding: 0.3rem 0.6rem;
+
+  .badges {
+    background: #ffffff;
+    color: #333;
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+  }
+
+  .player-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    font-weight: 700;
+
+    img {
+      width: 0.6rem;
+      height: auto;
+    }
+  }
+
+  .player-chip--blue {
+    color: #2196f3;
+  }
+
+  .player-chip--orange {
+    color: #f5822a;
+  }
+
+  .current-player img {
+    width: 0.9rem;
+    height: 0.9rem;
+    background: #2196f3;
+    border-radius: 999px;
+    padding: 0.15rem;
+  }
+
+  .exit {
+    background: transparent;
+    border: 1px solid $color-gaming-exit-bg;
+    color: $color-gaming-exit-bg;
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    img {
+      width: 0.6rem;
+      height: 0.6rem;
+    }
+  }
+}
+
+// The 2 example cards shown in the preview box (foreground + background).
 .preview-cards {
   position: relative;
   width: 60%;
@@ -131,21 +285,20 @@
     position: absolute;
     width: 65%;
     border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.35);
+    filter: drop-shadow(0 0.5rem 0.75rem rgba(0, 0, 0, 0.35));
   }
 
-  &__card--back {
+  &__card--foreground {
     top: 10%;
     left: 5%;
     transform: rotate(-6deg);
+    z-index: 2;
   }
 
-  &__card--front {
+  &__card--background {
     top: 22%;
     left: 32%;
     transform: rotate(4deg);
-    background-color: #f2f2f2;
-    padding: 12%;
-    box-sizing: border-box;
+    z-index: 1;
   }
 }

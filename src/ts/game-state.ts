@@ -1,12 +1,12 @@
 import type { GameSettings } from "./types";
 
 /**
- * Creates the initial, empty settings state.
- * Gets bound to the UI in Phase 2 (Settings page).
+ * Creates the initial settings state. Theme defaults to "codeVibes" so the
+ * preview is visible immediately when the settings page opens.
  */
 export function createInitialSettings(): GameSettings {
   return {
-    theme: null,
+    theme: "codeVibes",
     player: null,
     boardSize: null,
   };
