@@ -33,6 +33,6 @@ $color-gaming-exit-bg: #e6435a;
 // Homescreen button: measured from Figma (250x98px). Fluid via clamp()+aspect-ratio,
 // gap between icon/text/arrow measured directly from reference asset (~24px, not the
 // 40px listed in Figma - didn't match the actual shipped button image).
-$button-width-home: 15.625rem; // 250px, used as clamp() max value
+$button-width-home: 13.5rem; // ~216px, reduced per feedback (was 250px, felt too large)
 $button-aspect-home: "250 / 98";
 $button-gap-home: 1.5rem; // 24px

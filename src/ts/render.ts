@@ -23,8 +23,10 @@ function homeTemplate(): string {
       <div class="home__wrapper">
         <img class="home__controller-icon" src="/home/home-controller.png" alt="" aria-hidden="true" />
         <div class="home__content">
-          <p class="home__eyebrow">It's play time.</p>
-          <h1 class="home__title">Ready to play?</h1>
+          <div class="home__text-block">
+            <p class="home__eyebrow">It's play time.</p>
+            <h1 class="home__title">Ready to play?</h1>
+          </div>
           <div class="home__button-wrap">
             <button class="btn btn--play" type="button">
               <img class="btn__icon" src="/home/home-icon-controller.png" alt="" aria-hidden="true" />
@@ -242,7 +244,8 @@ function playerIcon(theme: GameTheme, color: PlayerColor): string {
 
 /** Mini mock header, structurally different per theme (rectangular vs pill). */
 function headerTemplate(theme: GameTheme, headerClass: string, activePlayer: PlayerColor): string {
-  const exitIcon = '<img src="/theme/gaming-icon-exit.png" alt="" aria-hidden="true" />';
+  const exitIconSrc = theme === "gaming" ? "/theme/gaming-icon-exit-white.png" : "/theme/codevibes-icon-exit.png";
+  const exitIcon = `<img src="${exitIconSrc}" alt="" aria-hidden="true" />`;
   return `
     <div class="${headerClass}">
       <span class="badges">
