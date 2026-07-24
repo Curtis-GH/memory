@@ -1,0 +1,49 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+// Score badge (icon + number per player). Shared between the board header
+// and the game-over score screen - theme shape/color rules live here once.
+.badges {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.player-chip {
+  @include flex-center;
+  gap: 0.4rem;
+  font-weight: 700;
+
+  img {
+    width: 1rem;
+    height: auto;
+  }
+}
+
+.player-chip--blue {
+  color: $color-player-blue;
+}
+
+.player-chip--orange {
+  color: $color-player-orange;
+}
+
+// Code vibes: rectangular box, no radius (confirmed via pixel measurement).
+.badges--codeVibes {
+  border: 1px solid $color-codevibes-badge-border;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.5rem 1rem;
+}
+
+// Gaming: true pill shape, white background (confirmed via Figma).
+.badges--gaming {
+  background: #ffffff;
+  color: #333;
+  border-radius: $badge-radius-gaming;
+  padding: 0.5rem 1.1rem;
+  font-family: $font-gaming;
+
+  .player-chip--blue {
+    color: $color-gaming-badge-blue;
+  }
+}

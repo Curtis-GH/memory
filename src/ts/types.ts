@@ -46,3 +46,6 @@ export interface BoardState {
   /** IDs of the currently revealed (but not yet matched) cards, max 2. */
   revealedIds: number[];
 }
+
+/** Result of a finished round: either a specific player won, or it's a tie. */
+export type Outcome = { kind: "winner"; player: PlayerColor } | { kind: "draw" };

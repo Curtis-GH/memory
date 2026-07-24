@@ -62,10 +62,27 @@ $color-popup-btn-outline-bg-codevibes: #eefcf9;
 $color-popup-btn-fill-gaming: #ed1b76;
 $color-popup-btn-outline-bg-gaming: #f0e5ee;
 
-// Gaming uses a rounded, playful display font - no font file was supplied via
-// Figma, so this is a Google Fonts stand-in chosen to look similar. Loaded in
-// index.html. Flagged for visual review once real gameplay is visible.
+// Gaming uses a rounded, playful display font for body/UI text - no font file was
+// supplied via Figma, so this is a Google Fonts stand-in chosen to look similar.
 $font-gaming: "Fredoka", sans-serif;
+
+// Gaming ALSO uses a second, angular "tech" display font specifically for the big
+// Game Over / Winner / Draw headlines (confirmed distinct from the body font via
+// the isolated "GAME OVER" export). Also just an approximation, no file supplied.
+$font-gaming-display: "Orbitron", sans-serif;
+
+// Winner screen text colors. Measured directly from the winner-icon assets
+// (player-token.png/-alt.png, player-icon-pawn.png/-alt.png) - these are
+// intentionally NOT the same as $color-player-blue/orange used elsewhere,
+// the Figma export uses a slightly different shade here.
+$color-winner-orange-codevibes: #f58e39;
+$color-winner-blue-codevibes: #2bb1ff;
+$color-winner-orange-gaming: #ea6900;
+$color-winner-blue-gaming: #2298db;
+
+// Muted button background on the Winner/Draw screen (Code vibes) - measured
+// directly from the Figma export, distinct from $color-bg-dark.
+$color-button-muted-codevibes: #415652;
 
 // Homescreen button: measured from Figma (250x98px). Fluid via clamp()+aspect-ratio,
 // gap between icon/text/arrow measured directly from reference asset (~24px, not the

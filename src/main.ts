@@ -2,6 +2,7 @@ import "./styles/main.scss";
 import { getAppRoot } from "./ts/dom";
 import { renderHome, renderSettings } from "./ts/render";
 import { renderBoard } from "./ts/render-board";
+import { renderGameOver } from "./ts/render-gameover";
 import { createInitialSettings } from "./ts/game-state";
 import { createBoardState } from "./ts/board";
 import type { GameSettings, BoardState } from "./ts/types";
@@ -31,12 +32,12 @@ function showSettings(app: HTMLElement, settings: GameSettings): void {
  */
 function showBoard(app: HTMLElement, settings: GameSettings): void {
   const state = createBoardState(settings.theme!, settings.boardSize!, settings.player!);
-  renderBoard(app, state, () => showHome(app), (finalState) => showGameOverPlaceholder(app, finalState));
+  renderBoard(app, state, () => showHome(app), (finalState) => showGameOver(app, finalState));
 }
 
-/** Placeholder until Phase 4 delivers the real Game Over screen. */
-function showGameOverPlaceholder(app: HTMLElement, state: BoardState): void {
-  app.innerHTML = `<p style="color: white; padding: 2rem;">Game over – Blue ${state.scores.blue} / Orange ${state.scores.orange} – Phase 4</p>`;
+/** Shows the Game over -> Winner/Draw sequence. "Back to start"/"Home" returns to the homescreen. */
+function showGameOver(app: HTMLElement, state: BoardState): void {
+  renderGameOver(app, state, () => showHome(app));
 }
 
 init();

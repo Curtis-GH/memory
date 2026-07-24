@@ -1,0 +1,194 @@
+@use "../abstracts/variables" as *;
+
+// NOTE: CSS Grid, not Flexbox. Grid items stretch to the full column width by
+// default (unlike flex, where a row item shrinks to its content) - so __wrapper
+// still gets its full max-width + margin:auto centering, while align-items:center
+// additionally centers the whole block vertically. A flex parent would break the
+// horizontal centering again (see the bug this replaced, fixed in an earlier commit).
+.gameover {
+  min-height: 100vh;
+  color: $color-text-light;
+  display: grid;
+  align-items: center;
+
+  &__wrapper {
+    max-width: 90rem;
+    margin: 0 auto;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    text-align: center;
+  }
+
+  &__title {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 800;
+    margin-bottom: 2rem;
+  }
+
+  &__label {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+
+  &__score {
+    display: inline-flex;
+  }
+}
+
+// Code vibes Winner stays top-anchored (confirmed by the user) - the confetti
+// banner is meant to sit right at the top edge, not float mid-screen.
+.gameover--codeVibes.outcome--winner {
+  align-items: start;
+}
+
+// Code vibes: solid dark bg, teal glow title (confirmed exact hex match).
+.gameover--codeVibes {
+  background-color: $color-bg-dark;
+
+  .gameover__title {
+    color: $color-codevibes-exit-border;
+    text-shadow: 0 0 1.5rem rgba(77, 213, 188, 0.6);
+  }
+}
+
+// Gaming: solid bg (same as board), pink glow title in the angular display font.
+.gameover--gaming {
+  background-color: $color-bg-gaming-end;
+
+  .gameover__title {
+    font-family: $font-gaming-display;
+    color: $color-popup-btn-fill-gaming;
+    text-shadow: 0 0 1.5rem rgba(237, 27, 118, 0.5);
+  }
+
+  .gameover__label {
+    font-family: $font-gaming;
+  }
+}
+
+// --- Winner / Draw outcome screen ---
+
+.outcome {
+  &__label {
+    // Measured against the title width in the Figma export: ~59% of the
+    // title's width, not the browser default this had before (was reading
+    // as visibly too small).
+    font-weight: 600;
+    font-size: clamp(1.1rem, 3.2vw, 1.85rem);
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+  }
+
+  &__title {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  &__icon {
+    // display:block + margin:auto instead of relying on the parent's text-align:
+    // as inline-block content, this was sharing a line with the button instead
+    // of stacking above it (confirmed by the fact that the icon/button centers
+    // averaged out to almost exactly the text's center - they were one shared
+    // line, not each individually centered).
+    display: block;
+    max-width: clamp(5rem, 12vw, 7.5rem);
+    height: auto;
+    margin: 0 auto 2rem;
+  }
+
+  &__confetti {
+    // Normal in-flow block (was position:absolute, which took it out of the
+    // text flow entirely and let it overlap "The winner is" - confirmed via
+    // the user's screenshot showing confetti streamers crossing the text).
+    display: block;
+    width: calc(100% - 3rem);
+    height: auto;
+    margin: 0 auto 1.75rem;
+    pointer-events: none;
+  }
+
+  &__scale {
+    // Same display:block + margin:auto fix as __icon above.
+    display: block;
+    // Resized per Figma measurement: scale icon is ~85% of the title's width,
+    // was reading closer to ~100% before (max reduced from 9rem to 7.5rem).
+    width: clamp(5rem, 12vw, 7.5rem);
+    height: clamp(4.2rem, 10vw, 6rem);
+    margin: 0 auto 2rem;
+    -webkit-mask: url("/gameover/gameover-scale-icon.png") center / contain no-repeat;
+    mask: url("/gameover/gameover-scale-icon.png") center / contain no-repeat;
+  }
+
+  &__button {
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.75rem 1.75rem;
+    cursor: pointer;
+  }
+}
+
+// Code vibes outcome colors (measured directly from the winner-icon assets,
+// intentionally a different shade than the board header's player colors).
+// Fixed selector: outcome and gameover--codeVibes are on the SAME element
+// (see render-gameover.ts), so this must be a compound selector (no space) -
+// the previous descendant-combinator version never matched anything.
+.gameover--codeVibes.outcome {
+  .outcome__title--blue {
+    color: $color-winner-blue-codevibes;
+  }
+
+  .outcome__title--orange {
+    color: $color-winner-orange-codevibes;
+  }
+
+  .outcome__title--draw {
+    color: $color-codevibes-exit-border;
+  }
+
+  .outcome__scale {
+    background-color: $color-codevibes-exit-border;
+  }
+
+  .outcome__button {
+    border: 1px solid $color-codevibes-exit-border;
+    background: $color-button-muted-codevibes;
+    color: $color-text-light;
+  }
+}
+
+// Gaming outcome colors + display font for the headline text. Same compound-selector fix as above.
+.gameover--gaming.outcome {
+  .outcome__title {
+    font-family: $font-gaming-display;
+  }
+
+  .outcome__label {
+    font-family: $font-gaming;
+  }
+
+  .outcome__title--blue {
+    color: $color-winner-blue-gaming;
+  }
+
+  .outcome__title--orange {
+    color: $color-winner-orange-gaming;
+  }
+
+  .outcome__title--draw {
+    color: $color-popup-btn-fill-gaming;
+  }
+
+  .outcome__scale {
+    background-color: $color-popup-btn-fill-gaming;
+  }
+
+  .outcome__button {
+    font-family: $font-gaming;
+    border: 1px solid $color-gaming-exit-border;
+    background: transparent;
+    color: $color-text-light;
+    border-radius: 0.6rem;
+  }
+}

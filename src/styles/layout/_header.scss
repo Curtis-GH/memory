@@ -1,7 +1,8 @@
 @use "../abstracts/variables" as *;
 @use "../abstracts/mixins" as *;
 
-// Shared layout, colors/shapes differ per theme below.
+// Shared layout, colors/shapes differ per theme below. Badge styling itself
+// lives in components/_badge.scss (reused by the game-over score screen too).
 .game-header {
   min-height: $header-height;
   display: flex;
@@ -9,31 +10,6 @@
   align-items: center;
   color: $color-text-light;
   gap: 1rem;
-
-  .badges {
-    display: flex;
-    gap: 1.25rem;
-    align-items: center;
-  }
-
-  .player-chip {
-    @include flex-center;
-    gap: 0.4rem;
-    font-weight: 700;
-
-    img {
-      width: 1rem;
-      height: auto;
-    }
-  }
-
-  .player-chip--blue {
-    color: $color-player-blue;
-  }
-
-  .player-chip--orange {
-    color: $color-player-orange;
-  }
 
   .current-player {
     @include flex-center;
@@ -65,12 +41,6 @@
 
 // Code vibes: rectangular boxes, no radius (confirmed via pixel measurement).
 .game-header--codeVibes {
-  .badges {
-    border: 1px solid $color-codevibes-badge-border;
-    background: rgba(255, 255, 255, 0.08);
-    padding: 0.5rem 1rem;
-  }
-
   .exit {
     border: 1px solid $color-codevibes-exit-border;
     background: $color-bg-dark;
@@ -85,17 +55,6 @@
   background: rgba(60, 70, 90, 0.6);
   border-radius: $header-radius-gaming;
   padding: 0.75rem 1.25rem;
-
-  .badges {
-    background: #ffffff;
-    color: #333;
-    border-radius: $badge-radius-gaming;
-    padding: 0.5rem 1.1rem;
-  }
-
-  .player-chip--blue {
-    color: $color-gaming-badge-blue;
-  }
 
   .current-player img {
     background: $color-gaming-badge-blue;

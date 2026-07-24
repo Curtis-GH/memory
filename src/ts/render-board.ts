@@ -22,12 +22,12 @@ const BOARD_METRICS: Record<GameTheme, { width: string; height: string; gap: Rec
 };
 
 /** CSS class suffix used for theme-scoped selectors ("codeVibes" | "gaming"). */
-function themeClass(theme: GameTheme): string {
+export function themeClass(theme: GameTheme): string {
   return theme === "codeVibes" ? "codeVibes" : "gaming";
 }
 
 /** Icon path for the header's player chips/current-player marker, per theme. */
-function playerIcon(theme: GameTheme, color: PlayerColor): string {
+export function playerIcon(theme: GameTheme, color: PlayerColor): string {
   const prefix = theme === "codeVibes" ? "codevibes" : "gaming";
   return `/theme/${prefix}-icon-player-${color}.png`;
 }
@@ -87,7 +87,7 @@ function headerTemplate(state: BoardState): string {
   const { theme, scores, currentPlayer } = state;
   return `
     <div class="game-header game-header--${themeClass(theme)}">
-      <div class="badges">
+      <div class="badges badges--${themeClass(theme)}">
         <span class="player-chip player-chip--blue"><img src="${playerIcon(theme, "blue")}" alt="" aria-hidden="true" /><span data-score="blue">${scoreLabel(theme, "Blue", scores.blue)}</span></span>
         <span class="player-chip player-chip--orange"><img src="${playerIcon(theme, "orange")}" alt="" aria-hidden="true" /><span data-score="orange">${scoreLabel(theme, "Orange", scores.orange)}</span></span>
       </div>
@@ -100,7 +100,7 @@ function headerTemplate(state: BoardState): string {
 }
 
 /** Score label text: Code vibes shows "Blue 0", Gaming shows just the number (icon carries the color). */
-function scoreLabel(theme: GameTheme, name: string, score: number): string {
+export function scoreLabel(theme: GameTheme, name: string, score: number): string {
   return theme === "codeVibes" ? `${name} ${score}` : `${score}`;
 }
 

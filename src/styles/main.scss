@@ -4,6 +4,7 @@
 
 @use "components/button";
 @use "components/card";
+@use "components/badge";
 
 @use "layout/header";
 @use "layout/grid";
@@ -11,5 +12,6 @@
 @use "pages/home";
 @use "pages/settings";
 @use "pages/game";
+@use "pages/gameover";
 
 @use "themes/themes";

@@ -1,4 +1,4 @@
-import type { BoardState, BoardSize, GameTheme, PlayerColor, Card } from "./types";
+import type { BoardState, BoardSize, GameTheme, PlayerColor, Card, Outcome } from "./types";
 
 /** All 18 available icon ids per theme, in the exact filename order shipped in /public/board/. */
 const ICON_SETS: Record<GameTheme, string[]> = {
@@ -110,6 +110,12 @@ function applyPairResult(cards: Card[], firstId: number, secondId: number, isMat
 /** Returns a new scores object with the given player's count increased by 1. */
 function bumpScore(scores: BoardState["scores"], player: PlayerColor): BoardState["scores"] {
   return { ...scores, [player]: scores[player] + 1 };
+}
+
+/** Compares final scores to determine the round's outcome. Call once isBoardComplete() is true. */
+export function determineOutcome(state: BoardState): Outcome {
+  if (state.scores.blue === state.scores.orange) return { kind: "draw" };
+  return { kind: "winner", player: state.scores.blue > state.scores.orange ? "blue" : "orange" };
 }
 
 /** Returns the other player's color. */
