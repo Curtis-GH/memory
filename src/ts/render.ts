@@ -1,9 +1,9 @@
 import type { GameSettings, GameTheme, PlayerColor, BoardSize } from "./types";
 import { setTheme, setPlayer, setBoardSize, isSettingsComplete } from "./game-state";
 
-// Phase 1: renderHome() implemented.
-// Phase 2: renderSettings() implemented.
-// TODO Phase 3/4: renderBoard(), Phase 5: renderGameOver()
+// Home and Settings screens. Board rendering lives in render-board.ts,
+// Game Over/Winner/Draw in render-gameover.ts (kept separate - each screen's
+// logic and templates are substantial enough to warrant its own module).
 
 /**
  * Renders the homescreen and wires up the play button.
@@ -27,16 +27,23 @@ function homeTemplate(): string {
             <p class="home__eyebrow">It's play time.</p>
             <h1 class="home__title">Ready to play?</h1>
           </div>
-          <div class="home__button-wrap">
-            <button class="btn btn--play" type="button">
-              <img class="btn__icon" src="/home/home-icon-controller.png" alt="" aria-hidden="true" />
-              Play
-              <img class="btn__icon" src="/home/home-icon-arrow.png" alt="" aria-hidden="true" />
-            </button>
-          </div>
+          ${playButtonTemplate()}
         </div>
       </div>
     </section>
+  `;
+}
+
+/** The "Play" button, with its controller/arrow icons. */
+function playButtonTemplate(): string {
+  return `
+    <div class="home__button-wrap">
+      <button class="btn btn--play" type="button">
+        <img class="btn__icon" src="/home/home-icon-controller.png" alt="" aria-hidden="true" />
+        Play
+        <img class="btn__icon" src="/home/home-icon-arrow.png" alt="" aria-hidden="true" />
+      </button>
+    </div>
   `;
 }
 
@@ -99,18 +106,25 @@ export function renderSettings(
 /** Full settings page markup, split into small template helpers below. */
 function settingsTemplate(settings: GameSettings): string {
   return `
-    <div class="settings__wrapper">
+    <section class="settings__wrapper">
       <div class="settings__title-row">
         <h1 class="settings__title">Settings</h1>
         <img class="settings__title-divider" src="/settings/settings-divider.png" alt="" aria-hidden="true" />
       </div>
       <div class="settings__body">
         ${optionsColumnTemplate(settings)}
-        <div class="settings__preview-column">
-          <div class="settings__preview"></div>
-          ${breadcrumbTemplate(settings)}
-        </div>
+        ${previewColumnTemplate(settings)}
       </div>
+    </section>
+  `;
+}
+
+/** Right column: the theme preview box + live breadcrumb bar. */
+function previewColumnTemplate(settings: GameSettings): string {
+  return `
+    <div class="settings__preview-column">
+      <div class="settings__preview"></div>
+      ${breadcrumbTemplate(settings)}
     </div>
   `;
 }
@@ -128,7 +142,6 @@ function optionsColumnTemplate(settings: GameSettings): string {
 
 /** Bottom bar: live breadcrumb of the current selection + Start button. */
 function breadcrumbTemplate(settings: GameSettings): string {
-  const disabled = isSettingsComplete(settings) ? "" : "disabled";
   const divider = `<img class="settings__breadcrumb__divider" src="/settings/settings-breadcrumb-divider.png" alt="" aria-hidden="true" />`;
   return `
     <div class="settings__breadcrumb">
@@ -138,11 +151,19 @@ function breadcrumbTemplate(settings: GameSettings): string {
       ${divider}
       <span>Board size: ${settings.boardSize ?? "—"}</span>
       <span class="settings__breadcrumb__spacer"></span>
-      <button class="btn btn--start" type="button" ${disabled}>
-        <img class="btn__icon" src="/settings/settings-icon-start.png" alt="" aria-hidden="true" />
-        Start
-      </button>
+      ${startButtonTemplate(settings)}
     </div>
+  `;
+}
+
+/** The "Start" button, disabled until all 3 settings are chosen. */
+function startButtonTemplate(settings: GameSettings): string {
+  const disabled = isSettingsComplete(settings) ? "" : "disabled";
+  return `
+    <button class="btn btn--start" type="button" ${disabled}>
+      <img class="btn__icon" src="/settings/settings-icon-start.png" alt="" aria-hidden="true" />
+      Start
+    </button>
   `;
 }
 

@@ -1,1 +1,5 @@
-// TODO Phase 2/3: 4 game themes (Code vibes, Gaming, DA Projects, Foods) - colors + icon sets
+// Intentionally empty: theme-specific rules (Code vibes / Gaming - reduced from
+// the originally planned 4 themes, see project decision) live directly next to
+// what they style via BEM modifiers (e.g. .game-header--codeVibes in
+// layout/_header.scss, .popup--gaming in pages/_game.scss) rather than being
+// centralized here. Kept as a file so the 7-1 folder structure stays complete.

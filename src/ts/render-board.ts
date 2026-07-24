@@ -86,7 +86,7 @@ function boardTemplate(state: BoardState): string {
 function headerTemplate(state: BoardState): string {
   const { theme, scores, currentPlayer } = state;
   return `
-    <div class="game-header game-header--${themeClass(theme)}">
+    <header class="game-header game-header--${themeClass(theme)}">
       <div class="badges badges--${themeClass(theme)}">
         <span class="player-chip player-chip--blue"><img src="${playerIcon(theme, "blue")}" alt="" aria-hidden="true" /><span data-score="blue">${scoreLabel(theme, "Blue", scores.blue)}</span></span>
         <span class="player-chip player-chip--orange"><img src="${playerIcon(theme, "orange")}" alt="" aria-hidden="true" /><span data-score="orange">${scoreLabel(theme, "Orange", scores.orange)}</span></span>
@@ -95,7 +95,7 @@ function headerTemplate(state: BoardState): string {
       <button class="exit" type="button">
         <img src="${exitIcon(theme)}" alt="" aria-hidden="true" /> Exit game
       </button>
-    </div>
+    </header>
   `;
 }
 
