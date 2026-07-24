@@ -28,6 +28,7 @@
   color: $color-bg-dark;
   border-radius: 0; // confirmed: no border-radius per Figma
   gap: $button-gap-home;
+  font-weight: 700; // explicit here too, per feedback the "Play" label should read clearly bold
 }
 
 .btn__icon {
