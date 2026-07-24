@@ -16,6 +16,9 @@
     margin: 0 auto;
     padding: clamp(1.5rem, 4vw, 3rem);
     text-align: center;
+    // Matches the Figma prototype: content fades + slides in from above
+    // instead of just appearing (mentor feedback - was missing before).
+    animation: gameover-slide-in 0.8s ease-out;
   }
 
   &__title {
@@ -190,5 +193,16 @@
     background: transparent;
     color: $color-text-light;
     border-radius: 0.6rem;
+  }
+}
+
+@keyframes gameover-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

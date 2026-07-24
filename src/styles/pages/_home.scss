@@ -56,9 +56,14 @@
   }
 
   &__controller-icon {
+    // Positioned relative to .home itself (full viewport width), not
+    // __wrapper (the centered max-width column) - on wide screens the wrapper
+    // is much narrower than the screen, so the old small negative offset just
+    // left the icon floating in the empty space instead of bleeding off the
+    // true edge (found via mentor feedback + screenshot).
     position: absolute;
-    left: clamp(-3rem, -2vw, -0.5rem);
-    bottom: clamp(-3rem, -2vw, -0.5rem);
+    left: clamp(-4rem, -3vw, -1rem);
+    bottom: clamp(-4rem, -3vw, -1rem);
     width: clamp(12rem, 20vw, 20rem);
     height: auto;
     opacity: 0.35;

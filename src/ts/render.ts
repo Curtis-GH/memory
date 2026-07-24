@@ -20,8 +20,8 @@ export function renderHome(root: HTMLElement, onPlay: () => void): void {
 function homeTemplate(): string {
   return `
     <section class="home">
+      <img class="home__controller-icon" src="/home/home-controller.png" alt="" aria-hidden="true" />
       <div class="home__wrapper">
-        <img class="home__controller-icon" src="/home/home-controller.png" alt="" aria-hidden="true" />
         <div class="home__content">
           <div class="home__text-block">
             <p class="home__eyebrow">It's play time.</p>
